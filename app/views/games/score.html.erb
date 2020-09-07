@@ -1,10 +1,11 @@
 <h1>Result</h1>
-<% if (@answer.split('').all?(/[#{@letters_string}]/)) == false %>
-    Sorry but <strong><%= @answer %></strong> can't be built out of <%= @letters.gsub(' ', ', ') %>
-<% elsif @word["found"] == false %>
-    Sorry but <strong><%= @answer %></strong> does not seem to be a valid English word... 
+<% if @not_in_array %>
+    <p>Sorry but <strong><%= @answer %></strong> can't be built out of <%= @letters.gsub(' ', ', ') %></p>
+<% elsif @not_true_word %>
+    <p>Sorry but <strong><%= @answer %></strong> does not seem to be a valid English word...</p>
     <p><%= link_to 'Play again', '/new' %></p>
-<% else %>
-    <strong>Congratulations!</strong> <%= @answer %> is a valid English word!
+<% elsif @correct_word %>
+    <p><strong>Congratulations!</strong> <%= @answer %> is a valid English word!</p>
+    <p>Score: <%= session[:score] %>
     <p><%= link_to 'Play again', '/new' %></p>
 <% end %>
